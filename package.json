@@ -1,50 +1,59 @@
 {
-  "name": "compound",
-  "version": "1.1.4-33",
-  "author": "Anatoliy Chakkaev",
-  "contributors": [
-    "Sascha Gehlich <contact@filshmedia.net> (http://filshmedia.net)",
-    "Artem Shoobovych <shybovycha@gmail.com>"
-  ],
-  "description": "CompoundJS - MVC framework for NodeJS",
-  "keywords": [
-    "mvc",
-    "web-framework",
-    "express",
-    "railway"
-  ],
-  "homepage": "http://railwayjs.com",
-  "engines": [
-    "node >= 0.8.0"
-  ],
-  "url": "http://compoundjs.com",
-  "main": "lib/server/compound",
-  "bin": {
-    "compound": "bin/compound",
-    "rw": "bin/compound"
-  },
-  "dependencies": {
-    "express": "latest",
-    "yaml-js": ">= 0.0.2",
-    "coffee-script": ">= 1.1.1",
-    "ejs-ext": "latest",
-    "jade-ext": "latest",
-    "railway-routes": "git://github.com/shybovycha/railway-routes.git#master",
-    "kontroller": "latest",
-    "seedjs": "latest",
-    "fs-extra": "latest"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/shybovycha/compound.git"
-  },
-  "devDependencies": {
-    "jugglingdb": ">= 0.1.25",
-    "nodeunit": "*",
-    "semicov": "*",
-    "marked": ">= 0.2.6"
-  },
-  "scripts": {
-    "test": "./support/nodeunit/bin/nodeunit test"
-  }
+    "name": "compound",
+    "version": "1.1.4-33",
+    "author": "Anatoliy Chakkaev",
+    "description": "CompoundJS - MVC framework for NodeJS",
+    "homepage": "http://railwayjs.com/",
+    "url": "http://railwayjs.com/",
+
+    "contributors": [
+        "Sascha Gehlich <contact@filshmedia.net> (http://filshmedia.net)",
+        "Artem Shoobovych <shybovycha@gmail.com>"
+    ],
+
+    "keywords": [
+        "mvc",
+        "web-framework",
+        "express",
+        "railway"
+    ],
+
+    "engines": [
+        "node >= 0.8.0"
+    ],
+
+    "main": "lib/server/compound",
+
+    "bin": {
+        "compound": "bin/compound",
+        "rw": "bin/compound"
+    },
+
+    "dependencies": {
+        "express": "latest",
+        "yaml-js": "latest",
+        "coffee-script": "latest",
+        "ejs-ext": "latest",
+        "jade-ext": "latest",
+        "railway-routes": "git://github.com/shybovycha/railway-routes.git#master",
+        "kontroller": "latest",
+        "seedjs": "latest",
+        "fs-extra": "latest"
+    },
+
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/shybovycha/compound.git"
+    },
+
+    "devDependencies": {
+        "jugglingdb": "latest",
+        "nodeunit": "latest",
+        "semicov": "latest",
+        "marked": "latest"
+    },
+
+    "scripts": {
+        "test": "./support/nodeunit/bin/nodeunit test"
+    }
 }
