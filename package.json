@@ -1,6 +1,6 @@
 {
   "name": "compound",
-  "version": "1.1.4-32",
+  "version": "1.1.4-33",
   "author": "Anatoliy Chakkaev",
   "contributors": [
     "Sascha Gehlich <contact@filshmedia.net> (http://filshmedia.net)",
@@ -10,8 +10,6 @@
   "keywords": [
     "mvc",
     "web-framework",
-    "rails",
-    "ruby-on-rails",
     "express",
     "railway"
   ],
@@ -38,7 +36,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/1602/compound.git"
+    "url": "https://github.com/shybovycha/compound.git"
   },
   "devDependencies": {
     "jugglingdb": ">= 0.1.25",
