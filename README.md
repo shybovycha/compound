@@ -1,8 +1,8 @@
 # compound
 
-[<img src="https://secure.travis-ci.org/1602/compound.png" />](http://travis-ci.org/#!/1602/compound)
+[<img src="https://secure.travis-ci.org/shybovycha/compound.png" />](http://travis-ci.org/#!/shybovycha/compound)
 
-<img src="https://raw.github.com/1602/compound/master/templates/public/images/compound.png" />
+<img src="https://raw.github.com/shybovycha/compound/master/templates/public/images/compound.png" />
 
 **CompoundJS** is a Ruby-on-Rails-like MVC framework for NodeJS&trade;. This repository is a fork of the 
 original compoundjs repository aimed to fix some notable bugs and add some useful functionality.
