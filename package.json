@@ -54,6 +54,6 @@
     },
 
     "scripts": {
-        "test": "nodeunit test my_app"
+        "test": "nodeunit test"
     }
 }
