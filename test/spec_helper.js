@@ -6,7 +6,7 @@ if (!process.env.TRAVIS) {
     });
 }
 
-global.app = require('../lib/server/compound').createServer()
+global.app = require('../lib/server/compound').createServer();
 global.compound = app.compound;
 global.args = [];
 compound.generators.init(compound, global.args);
@@ -59,28 +59,3 @@ function check_external_exports() {
         'Before run this, please ensure that ' +
         'require("spec_helper").init(exports); called');
 }
-
-// add assertions
-
-var nuPath = require('module')._resolveFilename('../support/nodeunit');
-if (typeof nuPath === 'string') nuPath = [nuPath];
-var assert = require(nuPath[0].replace(/index\.js$/, 'lib/assert'));
-
-// Check response status code 200 OK
-assert.status200 = function (response, message) {
-    if (response.statusCode !== 200) {
-        assert.fail(response.statusCode, 200, message || 'Status code is not 200', '===', assert.status200);
-    }
-}
-
-// Check redirection
-assert.redirect = function (response, path, message) {
-    if (response.statusCode !== 302) {
-        assert.fail(response.statusCode, 302, 'Status code is not 302', '===', assert.redirect);
-    }
-    var realPath = require('url').parse(response.headers.location).pathname;
-    if (realPath !== path) {
-        assert.fail(realPath, path, message || 'Wrong location', '===', assert.redirect);
-    }
-}
-
