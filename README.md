@@ -1,24 +1,32 @@
-About [<img src="https://secure.travis-ci.org/1602/compound.png" />](http://travis-ci.org/#!/1602/compound)
-=====
+# compound
 
-<img
-src="https://raw.github.com/1602/compound/master/templates/public/images/compound.png" />
+[<img src="https://secure.travis-ci.org/1602/compound.png" />](http://travis-ci.org/#!/1602/compound)
 
-CompoundJS - MVC framework for NodeJS&trade;. It allows you to build web application in minutes.
+<img src="https://raw.github.com/1602/compound/master/templates/public/images/compound.png" />
 
-Installation
-============
+**CompoundJS** is a Ruby-on-Rails-like MVC framework for NodeJS&trade;. This repository is a fork of the 
+original compoundjs repository aimed to fix some notable bugs and add some useful functionality.
 
-Option 1: npm
+Currently, major differences are:
+
+  * improved `selectTag` helper
+  * `default` parameter for the `inputTag` helper
+  * exception (during the application generation, `compound g app`) handling (removing all created files and directories)
+  * fix that prevents the code from being injected into the URL (that was found as a bug, related to the **JugglingDB**)
+  * fix that replaces the invalid form input' names with the valid ones
+  * `nib` framework being copied right into the `app/assets/stylesheets/` directory (makes it available for being used in your application)
+
+## Installation
+
+### Option 1: using the `npm`
 
     $ sudo npm install compound -g
 
-Option 2: GitHub
+### Option 2: cloning from `GitHub`
 
     $ sudo npm install 1602/compound
 
-Usage
-=====
+## Usage
 
     # initialize app
     $ compound init blog && cd blog
@@ -33,29 +41,29 @@ Usage
     # visit app
     $ open http://localhost:3000/posts
 
-Using client-side framework
-===========================
+## Client-side usage
 
-Experimental feature. Allows to work transparently on client and server (same codebase working on clientside).
-Install additional prerequisites:
+**Be aware! This is an experimental feature!** 
 
-    $ npm install railway-routes browserify
+This one allows you to work transparently on client as well as on the server (same codebase working at the client-side).
 
-Uncomment following configuration line in `config/environment.js`:
+  * Install additional prerequisites:
 
-    app.enable('clientside');
+        $ npm install railway-routes browserify
 
-Run app
+  * Uncomment following configuration line in `config/environment.js`:
 
-    node .
+        app.enable('clientside');
 
-Make sure you've included `public/javascripts/compound.js` in your layout.
+  * Run app
 
-Short functionality review
-==========================
+        node server.js
 
-CLI tool
---------
+**Note:** make sure you've included `public/javascripts/compound.js` at your layout.
+
+## Short functionality review
+
+### CLI tool
 
     Usage: compound command [argument(s)]
 
@@ -68,39 +76,58 @@ CLI tool
       s,  server [port]            Run compound server
       x,  install gitUrl [extName] Install compound eXtension
 
-#### compound init [appname][ key(s)]
-    keys:
+#### `compound init [appname][ key(s)]`
+
+Keys:
+
     --coffee                 # Default: no coffee by default
     --tpl jade|ejs           # Default: ejs
     --css sass|less|stylus   # Default: stylus
     --db redis|mongodb|nano|mysql|sqlite3|postgres
                              # Default: memory
 
-#### compound generate smth - smth = generator name (controller, model, scaffold, ...can be extended via plugins)
+#### `compound generate [component type]`
 
-##### builtin generator: model
+Generates the component of the application.
+
+Types available are:
+
+    controller
+    model
+    scaffold     # generates the model, the helper, views, routes and controller for the resource
+    crud         # the same as "scaffold"
+    app          # generates the application skeleton
+
+#### Built-in generator for models
 
     compound g model user email password approved:boolean # generate User model with fields user, password: String, approved: Boolean
     compound g post title content --coffee # generate Post model in coffee script syntax
 
-##### builtin generator: scaffold (crud)
+#### Built-in generator for resources
 
     compound g scaffold todo title done:boolean --coffee # generate scaffold for Todo model (title: String, done: Boolean)
 
-##### builtin generator: controller
+#### Built-in generator for controllers
     compound g controller sessions new create destroy # generate sessions controller with actions and views
-    
-#### compound server 8000 or **PORT=8000 node server** - run server on port `8000`
 
-#### compound console - run debugging console (see details below)
+#### `compound server` 
 
-#### compound routes - print routes map (see details below)
+Starts the server on the port specified. The same as `node server.js` or `node .` or (partially) `nodemon server.js` or (again, **partially**) `forever server.js`.
 
+I recommend you to use `forever` node module. It will help you in many situations - you won't need to restart the server and
+you will not be disappointed if it stops unexpectedly.
 
-Directory structure
--------------------
+#### `compound console` 
 
-On initialization directories tree generated, like that:
+Starts the  debugging console (see details below).
+
+#### `compound routes` 
+
+Shows all the routes available in your application.
+
+### Directory structure
+
+The blank application has the following structure:
 
     .
     |-- app
@@ -143,8 +170,7 @@ On initialization directories tree generated, like that:
         |-- tsl.cert
         `-- tsl.key
 
-HTTPS Support
--------------
+## HTTPS Support
 
 Just place your key and cert into config directory, compound will use it.
 Default names for keys are `tsl.key` and `tsl.cert`, but you can store in in another place, in that case just pass filenames to createServer function:
@@ -159,8 +185,7 @@ Few helpful commands:
     # generate cert
     openssl req -new -x509 -key config/tsl.key  -out config/tsl.cert -days 1095 -batch
 
-Routing
--------
+## Routing
 
 Now we do not have to tediously describe REST rotes for each resource, enough to write in `config/routes.js` code like this:
 
@@ -250,8 +275,7 @@ Filter by helper name:
     likes_admin_post PUT    /admin/posts/:id/likes.:format? admin/posts#likes
 
 
-Helpers
--------
+## Helpers
 
 In addition to regular rails helpers `link_to`, `form_for`, `javascript_include_tag`, `form_for`, etc. there are also helpers for routing: each route generates a helper method that can be invoked in a view:
 
@@ -263,8 +287,7 @@ generates output:
     <a href="/admin/posts/new">New post</a>
     <a href="/admin/posts/10/edit">New post</a>
 
-Controllers
------------
+## Controllers
 
 The controller is a module containing the declaration of actions such as this:
 
@@ -303,7 +326,7 @@ The controller is a module containing the declaration of actions such as this:
         });
     }
 
-## Generators ##
+## Generators
 
 Compound offers several built-in generators: for a model, controller and for
 initialization. Can be invoked as follows:
@@ -330,13 +353,11 @@ initialization. Can be invoked as follows:
 
 Currently it generates only `*.ejs` views
 
-Models
-------
+## Models
 
-Checkout [JugglingDB][2] docs to see how to work with models.
+Check out [JugglingDB][2] docs to see how to work with models.
 
-CompoundJS Event model
-----------------------
+## CompoundJS Event model
 
 Compound application loading process supports following events to be attached
 (in chronological order):
@@ -350,8 +371,7 @@ Compound application loading process supports following events to be attached
 7. models
 8. initializers
 
-REPL console
-------------
+## REPL console
 
 To run REPL console use command
 
@@ -385,8 +405,7 @@ Example:
       isAdmin: [Getter/Setter],
       id: [Getter/Setter] }
 
-Localization
-------------
+## Localization
 
 To add another language to app just create yml file in `config/locales`,
 for example `config/locales/jp.yml`, copy contents of `config/locales/en.yml` to new
@@ -402,19 +421,16 @@ If you don't need locales support you can turn it off in `config/environment`:
 
     app.set('i18n', 'off');
 
-Logger
------
+## Logger
 
     app.set('quiet', true); // force logger to log into `log/#{app.settings.env}.log`
     compound.logger.write(msg); // to log message
 
-Configuring
-===========
+## Configuring
 
 Compound has some configuration options allows to customize app behavior
 
-eval cache
-----------
+### eval cache
 
 Enable controllers caching, should be turned on in prd. In development mode
 disabling cache allows to avoid server restarting after each model/controller change
@@ -422,43 +438,37 @@ disabling cache allows to avoid server restarting after each model/controller ch
     app.disable('eval cache'); // in config/environments/development.js
     app.enable('eval cache'); // in config/environments/production.js
 
-model cache
------------
+### model cache
 
 Same option for models. When disabled model files evaluated per each request.
 
     app.disable('model cache'); // in config/environments/development.js
 
-view cache
-----------
+### view cache
 
 Express.js option, enables view caching.
 
     app.disable('view cache'); // in config/environments/development.js
 
-quiet
------
+### quiet
 
 Write logs to `log/NODE_ENV.log`
 
     app.set('quiet', true); // in config/environments/test.js
 
-merge javascripts
------------------
+### javascripts merging
 
 Join all javascript files listed in `javascript_include_tag` into one
 
     app.enable('merge javascripts'); // in config/environments/production.js
 
-merge stylesheets
------------------
+### stylesheets merging
 
 Join all stylesheet files listed in `stylesheets_include_tag` into one
 
     app.enable('merge stylesheets'); // in config/environments/production.js
 
-MIT License
-===========
+## MIT License
 
     Copyright (C) 2011 by Anatoliy Chakkaev <mail [åt] anatoliy [døt] in>
 
