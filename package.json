@@ -1,6 +1,6 @@
 {
     "name": "compound",
-    "version": "1.1.4-53",
+    "version": "1.1.4-54",
     "author": "Anatoliy Chakkaev",
     "description": "CompoundJS - MVC framework for NodeJS",
     "homepage": "http://railwayjs.com/",
@@ -38,7 +38,8 @@
         "railway-routes": "git://github.com/shybovycha/railway-routes.git#master",
         "kontroller": "latest",
         "seedjs": "latest",
-        "fs-extra": "latest"
+        "fs-extra": "latest",
+        "send": "latest"
     },
 
     "repository": {
