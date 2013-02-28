@@ -15,7 +15,10 @@ fs.mkdirSync = function (name) {
 fs.chmodSync = function () {};
 
 var writeFileSync = fs.writeFileSync,
-    readFileSync = fs.readFileSync;
+    readFileSync = fs.readFileSync,
+    closeSync = fs.closeSync,
+    writeSync = fs.writeSync,
+    existsSync = fs.existsSync;
 
 fs.writeFileSync = function (name, content) {
     memfs[name] = content;
@@ -66,9 +69,15 @@ it('should generate scaffold', function (test) {
     test.done();
 });
 
-it('should generate features', function (test) {
+it('should generate clienside', function (test) {
+    fs.existsSync = function () { return true };
+    fs.readFileSync = function () { return 'contents'; };
+    compound.structure.views = {'file': 'path.js'};
+    compound.structure.helpers = {'file': {}};
     updArgs([]);
-    compound.generators.perform('features', args);
+    compound.generators.perform('cs', args);
+    fs.existsSync = existsSync;
+    fs.readFileSync = readFileSync;
     test.done();
 });
 
@@ -76,6 +85,7 @@ it('relax', function (test) {
     fs.writeFileSync = writeFileSync;
     fs.mkdirSync = mkdirSync;
     fs.chmodSync = chmodSync;
+    fs.existsSync = existsSync;
     process.exit = exit;
     test.done();
 });
