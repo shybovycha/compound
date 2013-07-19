@@ -112,7 +112,7 @@ context 'formTag', (test) ->
 
         test.equal(buf[0], '<form method="POST" action="/resources/7"><input type="hidden" name="param_name" value="token_value" /><input type="hidden" name="_method" value="PUT" />')
         test.equal(buf[1], '<input name="Resource[name]" id="Resource_name" type="text" value="" />')
-        test.equal(buf[2], '<input name="Resource[sub][obj]" id="Resource_sub_obj" type="text" value="" />')
+        test.equal(buf[2], '<input name="Resource[sub][obj]" id="Resource_sub_obj" type="text" />')
 
         test.done()
 
