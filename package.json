@@ -30,7 +30,7 @@
     },
 
     "dependencies": {
-        "express": "git://github.com/shybovycha/express.git#master",
+        "express": "latest",
         "yaml-js": "latest",
         "coffee-script": "latest",
         "ejs-ext": "latest",
