@@ -1,9 +1,21 @@
 module.exports = function (compound) {
-    return typeof window === 'undefined' ? [
-        '{{ VIEWENGINE }}-ext',
-        'jugglingdb',
-        'seedjs'
-    ].map(require) : [
-    ];
+  var defaultModules = [
+      'jugglingdb',
+      'co-assets-compiler'
+    ], developmentModules = [];
+
+  if ('development' === compound.app.get('env')) {
+    developmentModules = [
+      '{{ VIEWENGINE }}-ext',
+      'seedjs',
+      'co-generators'
+    ]
+  }
+
+  if (typeof window === 'undefined') {
+    return defaultModules.concat(developmentModules).map(require);
+  } else {
+    return []
+  }
 };
 
